@@ -1,0 +1,53 @@
+[build-system]
+requires = ["hatchling>=1.27"]
+build-backend = "hatchling.build"
+
+[project]
+name = "airwallet-export"
+version = "0.1.0"
+description = "Export original Apple Wallet card backgrounds from a trusted USB iPhone"
+readme = "README.md"
+requires-python = ">=3.11"
+license = { file = "LICENSE" }
+authors = [{ name = "airwallet-export contributors" }]
+dependencies = [
+  "pymobiledevice3>=11.15.5,<12",
+]
+
+[project.scripts]
+airwallet-export = "airwallet_export.cli:main"
+
+[dependency-groups]
+dev = [
+  "mypy>=1.15",
+  "pytest>=8.3",
+  "ruff>=0.11",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/airwallet_export"]
+exclude = ["src/airwallet_export/vendor/airlift/**"]
+
+[tool.hatch.build.targets.wheel.force-include]
+"src/airwallet_export/vendor/airlift/Sources/airtraffic_host.m" = "airwallet_export/vendor/airlift/Sources/airtraffic_host.m"
+"src/airwallet_export/vendor/airlift/LICENSE" = "airwallet_export/vendor/airlift/LICENSE"
+"src/airwallet_export/native/airtraffic_config.h" = "airwallet_export/native/airtraffic_config.h"
+
+[tool.pytest.ini_options]
+addopts = "-q"
+pythonpath = ["src"]
+testpaths = ["tests"]
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+files = ["src", "tests"]
+exclude = ["src/airwallet_export/vendor/airlift"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+exclude = ["src/airwallet_export/vendor/airlift"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM"]

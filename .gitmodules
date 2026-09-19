@@ -1,0 +1,4 @@
+[submodule "src/airwallet_export/vendor/airlift"]
+	path = src/airwallet_export/vendor/airlift
+	url = https://github.com/0xjohnnydev/airlift.git
+	branch = main

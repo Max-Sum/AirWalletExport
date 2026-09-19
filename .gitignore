@@ -1,0 +1,12 @@
+.venv/
+.DS_Store
+.mypy_cache/
+.pytest_cache/
+.ruff_cache/
+__pycache__/
+*.py[cod]
+dist/
+build/
+*.egg-info/
+exports/
+.airwallet-export/
